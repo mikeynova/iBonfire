@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { allActions } from '../App';
 
-export default class ProfilePageBonfire extends Component {
+class ProfilePageBonfire extends Component {
 	handleBonfireMouse() {
 		this.props.changeBonfirePopupData(this.props.data);
 		$('.ProfilePageBonfirePopup').addClass('animateLeft');

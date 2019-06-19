@@ -6,7 +6,7 @@ import { allActions } from '../App';
 import {updateUserBio, getUserData, getCreatedBonfires} from '../../actions/profile';
 import { browserHistory } from 'react-router';
 
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

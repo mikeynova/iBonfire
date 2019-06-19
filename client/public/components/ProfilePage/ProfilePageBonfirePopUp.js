@@ -6,7 +6,7 @@ import Chip from 'material-ui/Chip';
 import {getBonfireData, getUserData, getBonfireUsers} from '../../actions/profile';
 
 
-export default class ProfilePageBonfirePopup extends Component {
+class ProfilePageBonfirePopup extends Component {
   constructor(props) {
     super(props);
     this.state = {
