@@ -9,12 +9,13 @@ import * as chatActions from '../actions/chats';
 import * as profileActions from '../actions/profile';
 import * as drawerActions from '../actions/drawer';
 import { facebookInit } from '../helpers/fbHelper';
-import injectTapEventPlugin from "react-tap-event-plugin";
+import BonfireMap from './BonfireMap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import injectTapEventPlugin from "react-tap-event-plugin";
 
 export const allActions = { ...actions, ...chatActions, ...profileActions, ...drawerActions };
 
-injectTapEventPlugin();
+// injectTapEventPlugin();
 
 class App extends Component {
 	constructor(props) {
@@ -29,11 +30,9 @@ class App extends Component {
 
   render() {
     return (
-    <MuiThemeProvider>
-  		<div>
-  			{this.props.children}
-  		</div>
-    </MuiThemeProvider>
+  		<MuiThemeProvider>
+  			<BonfireMap {...this.props}/>
+  		</MuiThemeProvider>
     )
   }
 }

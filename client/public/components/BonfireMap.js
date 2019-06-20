@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, withGoogleMap } from "react-google-maps";
 import { facebookLogout, facebookInit } from '../helpers/fbHelper';
 
-import { default as InfoBox } from '../../../node_modules/react-google-maps/lib/addons/InfoBox';
+// import { default as InfoBox } from '../../../node_modules/react-google-maps/lib/addons/InfoBox';
+const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
+
 
 import BonfireModal from './BonfireModal';
 import MarkerModal from './MarkerModal';
@@ -213,52 +215,83 @@ class BonfireMap extends Component {
 	render() {
     $('body').attr( 'id', 'iBonfire');
 		return (
-				<GoogleMapLoader
-				  containerElement={
-				    <div style={{ height: "100%" }}/>
-				  }
-				  googleMapElement={
-				    <GoogleMap
-							ref="googleMap"
-							defaultZoom={15}
-				      onCenterChanged={this.newCenter.bind(this)}
-				      center={this.state.location}
-				      defaultCenter={this.props.location}
-				      onClick={this.handleMapClick.bind(this)}
-				      defaultOptions={{
-			          styles: [{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
-			        }}
-				    >
-
-				   	{this.state.markers.map((marker, index) => {
-		    			let position = {
-		    				lat: Number(marker.latitude),
-		    				lng: Number(marker.longitude)
-		    			}
-		    			const ref = `marker_${index}`;
-		    			return (
-			    			<Marker
-					    		icon='../media/newBonfire.png'
-					    		position={position}
-					    		defaultAnimation={2}
-					    		key={index}
-					    		ref={ref}
-					    		value={marker}
-					    		onMouseover={() => this.openModal(marker)}
-				    		>
-			    				{marker.showInfo ? this.renderInfoWindow(ref, marker) : null }
-
-			    			</Marker>
-		    			)
-		    		})}
-
-						<BonfireModal />
-				    </GoogleMap>
-			  	}
+			// <div>heyy</div>
+				<MapComponent
+					isMarkerShown
+					googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+					loadingElement={<div style={{ height: `100%` }} />}
+					containerElement={<div style={{ height: window.innerHeight }} />}
+					mapElement={<div style={{ height: `100%` }} />}
+					defaultCenter={this.state.location}
 				/>
+				// <GoogleMapLoader
+				//   containerElement={
+				//     <div style={{ height: "100%" }}/>
+				//   }
+				//   googleMapElement={
+					// <div>
+					// 	{
+					// 		withGoogleMap(props => (
+					// 			<GoogleMap
+					// 				ref="googleMap"
+					// 				defaultZoom={15}
+					// 				onCenterChanged={this.newCenter.bind(this)}
+					// 				center={this.state.location}
+					// 				defaultCenter={this.props.location}
+					// 				onClick={this.handleMapClick.bind(this)}
+					// 				defaultOptions={{
+					// 					styles: [{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
+					// 				}}
+					// 			>
+		
+					// 			 {this.state.markers.map((marker, index) => {
+					// 				let position = {
+					// 					lat: Number(marker.latitude),
+					// 					lng: Number(marker.longitude)
+					// 				}
+					// 				const ref = `marker_${index}`;
+					// 				return (
+					// 					<Marker
+					// 						icon='../media/newBonfire.png'
+					// 						position={position}
+					// 						defaultAnimation={2}
+					// 						key={index}
+					// 						ref={ref}
+					// 						value={marker}
+					// 						onMouseover={() => this.openModal(marker)}
+					// 					>
+					// 						{marker.showInfo ? this.renderInfoWindow(ref, marker) : null }
+		
+					// 					</Marker>
+					// 				)
+					// 			})}
+		
+					// 			<BonfireModal />
+					// 			</GoogleMap>
+								
+					// 		))
+					// 	}
+					// </div>
+			  	// }
+				// />
     )
 	}
 }
+
+const MapComponent = withGoogleMap((props) => {
+	return (
+		<GoogleMap
+			defaultZoom={15}
+			defaultCenter={props.defaultCenter}
+			defaultOptions={{
+										styles: [{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
+									}}
+		>
+			{props.isMarkerShown && <Marker position={props.defaultCenter} />}
+			<BonfireModal />
+		</GoogleMap>
+	)}
+);
 
 const mapStateToProps = state => {
 	return {

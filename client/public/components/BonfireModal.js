@@ -135,7 +135,7 @@ class BonfireModal extends Component {
   render() {
     return (
       <div className={this.props.changeClass.changed.bonfireModal}>
-        <h id="CreateBonfireHeader">Create New Bonfire</h>
+        <h1 id="CreateBonfireHeader">Create New Bonfire</h1>
         <div id={this.props.changeClass.changed.modelTextBox}>
             <TextField
               underlineFocusStyle={{borderColor: '#C3B1AB'}}

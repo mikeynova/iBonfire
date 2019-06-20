@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, Link, browserHistory, IndexRoute, hashHistory, Switch } from 'react-router';
+import { createBrowserHistory } from 'history';
 import { combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -15,18 +16,19 @@ import About from './public/components/About';
 
 import InitFB from './public/components/auth/InitFB';
 
+const history = createBrowserHistory();
 const createStoreWithMiddleWare = applyMiddleware(thunk)(createStore);
-export const store = createStoreWithMiddleWare(rootReducer, window.devToolsExtension ? window.devToolsExtension() : f => f);
+export const store = createStoreWithMiddleWare(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
 
 const router = (
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/about" component={About} />
-      <Route path="/" component={InitFB(App)} >
-        <IndexRoute component={InitFB(Home)} />
+      <Switch>
+        <Route path="/" component={InitFB(App)} />
         <Route path="login" component={InitFB(Login)} />
         <Route path="chats/:bonId" component={InitFB(ChatPage)} />
-      </Route>
+      </Switch>
     </Router>
   </Provider>
 )
@@ -34,4 +36,3 @@ const router = (
 ReactDOM.render(
   router, document.getElementById('app')
 );
-

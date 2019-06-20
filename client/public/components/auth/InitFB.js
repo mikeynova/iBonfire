@@ -15,19 +15,17 @@ const Wrapper = (CheckedComponent) => {
         facebookInit();
       }
     }
-
     componentDidMount() {
       if(window.isLoaded) {
         checkLoginStatus();
         if(!this.props.facebook.currUser.id) {
+          console.log('23')
           this.props.getCurrentUser();
         }
       }
-
       if(!localStorage.getItem('latitude') || !localStorage.getItem('longitude') && !window.gettingLocation) {
         this.props.getLocation();
       }
-
       this.props.getMarkers();
     }
 

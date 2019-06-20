@@ -273,6 +273,7 @@ export function sendDescription(modalObj) {
 }
 
 export function getLocation(fbId) {
+  console.log('getlocation')
   if (navigator.geolocation) {
     window.gettingLocation = true;
     const location = new Promise((resolve, reject) => {
