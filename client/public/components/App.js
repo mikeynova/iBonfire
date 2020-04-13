@@ -10,6 +10,8 @@ import * as profileActions from '../actions/profile';
 import * as drawerActions from '../actions/drawer';
 import { facebookInit } from '../helpers/fbHelper';
 import BonfireMap from './BonfireMap';
+import BonfireModal from './BonfireModal';
+import Home from './Home';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import injectTapEventPlugin from "react-tap-event-plugin";
 
@@ -31,7 +33,7 @@ class App extends Component {
   render() {
     return (
   		<MuiThemeProvider>
-  			<BonfireMap {...this.props}/>
+  			<Home {...this.props}/>
   		</MuiThemeProvider>
     )
   }

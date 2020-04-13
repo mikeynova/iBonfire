@@ -24,9 +24,9 @@ class Home extends Component {
   renderMap() {
     const map = (
       <div className="Map">
-        <Navigation renderProfile={this.renderProfile}/>
-        <BonfireMap/>
-        <BonfireDrawer renderProfile={this.renderProfile}/>
+        <Navigation {...this.props} renderProfile={this.renderProfile}/>
+        <BonfireMap {...this.props}/>
+        <BonfireDrawer {...this.props} renderProfile={this.renderProfile}/>
       </div>
     )
     this.setState({visibleComponent: map})
