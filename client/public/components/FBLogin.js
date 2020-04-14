@@ -36,10 +36,10 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        {/* <video  id="bgvid" autoPlay loop muted>
+        <video  id="bgvid" autoPlay loop muted>
           <source src="../media/Open-Fire/MP4/Open-Fire.mp4" type="video/mp4"/>
           <source src="../media/Open-Fire/WEBM/Open-Fire.webm" type="video/webm"/>
-        </video> */}
+        </video>
         <div className="FrontPageBtns">
           <div
             className="fb-login-button"
@@ -50,16 +50,13 @@ class Login extends Component {
             data-auto-logout-link="false"
             data-use-continue-as="false"
           />
-          {/* <li>
-            <button id="FacebookLoginButton" type="button" onClick={this.handleLoginClick}>Login</button>
-          </li> */}
-          {/* <li>
+          <li>
             <button id="LearnMoreButton" type="button" onClick={this.handleLearnMoreClick}>More Info</button>
-          </li> */}
+          </li>
         </div>
-        {/* <div id="Logo">
+        <div id="Logo">
           <img src="../media/iBonfire.png"/>
-        </div> */}
+        </div>
       </div>
     )
   }

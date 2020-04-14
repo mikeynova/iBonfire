@@ -12,12 +12,12 @@
 }
 
 .Login {
-	/* width: 100%;
+	/* width: 100%; */
 	height: 100%;
-	margin: 0 auto;
-  overflow-y: hidden;
-  overflow-x: hidden; */
-  flex: 1;
+	/* margin: 0 auto; */
+  /* overflow-y: hidden; */
+  /* overflow-x: hidden; */
+  /* flex: 1; */
 }
 
 #FacebookLoginButton {
@@ -54,9 +54,17 @@
 
 .FrontPageBtns {
   /* list-style-type: none; */
-  flex: 1;
+  /* flex: 1;
   justify-content: 'center';
-  flex-direction: 'center';
+  flex-direction: 'center'; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: blue;
 }
 
 #Logo {

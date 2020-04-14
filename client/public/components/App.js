@@ -15,6 +15,7 @@ import Home from './Home';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import injectTapEventPlugin from "react-tap-event-plugin";
 
+import '../styles/default.css';
 export const allActions = { ...actions, ...chatActions, ...profileActions, ...drawerActions };
 
 // injectTapEventPlugin();
