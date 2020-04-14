@@ -30,22 +30,35 @@ const Wrapper = (CheckedComponent) => {
     }
 
     render() {
-      if(window.isLoaded && window.statusChecked && !this.props.facebook.loggedIn) {
+      console.log('window.isLoaded:', window.isLoaded)
+      console.log('window.statusChecked:', window.statusChecked)
+      console.log('this.props.facebook.loggedIn:', this.props.facebook.loggedIn)
+
+      // if(window.isLoaded && window.statusChecked && !this.props.facebook.loggedIn) {
+      //   console.log(34)
+      //   return <FBLogin {...this.props} />
+      // }
+
+
+      if(!this.props.facebook.loggedIn) {
+        console.log(34)
         return <FBLogin {...this.props} />
       }
 
-      if(!window.isLoaded || !window.statusChecked || window.gettingLocation) {
-        return (
-          <div className="spinner">
-            <div className="double-bounce1"></div>
-            <div className="double-bounce2"></div>
-          </div>
-        )
-      }
+      // if(!window.isLoaded || !window.statusChecked || window.gettingLocation) {
+      //   console.log(39)
+      //   return (
+      //     <div className="spinner">
+      //       <div className="double-bounce1"></div>
+      //       <div className="double-bounce2"></div>
+      //     </div>
+      //   )
+      // }
 
-      if(this.props.facebook.loggedIn) {
-        return <CheckedComponent {...this.props} />
-      }
+      // if(this.props.facebook.loggedIn) {
+      //   console.log(49)
+      //   return <CheckedComponent {...this.props} />
+      // }
     }
   }
 };

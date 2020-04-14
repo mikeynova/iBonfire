@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import { facebookInit, facebookLogin, checkLoginStatus } from '../helpers/fbHelper';
+import { facebookInit, checkLoginStatus } from '../helpers/fbHelper';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'react-redux';
 import * as actions from '../actions/index';
@@ -35,22 +35,31 @@ class Login extends Component {
 
   render() {
     return (
-      <div id="Login">
-        <video  id="bgvid" autoPlay loop muted>
+      <div className="Login">
+        {/* <video  id="bgvid" autoPlay loop muted>
           <source src="../media/Open-Fire/MP4/Open-Fire.mp4" type="video/mp4"/>
           <source src="../media/Open-Fire/WEBM/Open-Fire.webm" type="video/webm"/>
-        </video>
-        <ul className="FrontPageBtns">
-          <li>
+        </video> */}
+        <div className="FrontPageBtns">
+          <div
+            className="fb-login-button"
+            data-width=""
+            data-size="large"
+            data-button-type="continue_with"
+            data-layout="default"
+            data-auto-logout-link="false"
+            data-use-continue-as="false"
+          />
+          {/* <li>
             <button id="FacebookLoginButton" type="button" onClick={this.handleLoginClick}>Login</button>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <button id="LearnMoreButton" type="button" onClick={this.handleLearnMoreClick}>More Info</button>
-          </li>
-        </ul>
-        <div id="Logo">
-          <img src="../media/iBonfire.png"/>
+          </li> */}
         </div>
+        {/* <div id="Logo">
+          <img src="../media/iBonfire.png"/>
+        </div> */}
       </div>
     )
   }
