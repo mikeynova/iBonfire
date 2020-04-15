@@ -1,5 +1,6 @@
+
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRoute, hashHistory, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { combineReducers, applyMiddleware } from 'redux';
@@ -33,6 +34,12 @@ const router = (
   </Provider>
 )
 
-ReactDOM.render(
+if (module.hot) {
+  module.hot.accept(router, () => {
+    render(render(router, document.getElementById('app')))
+  })
+}
+
+render(
   router, document.getElementById('app')
 );

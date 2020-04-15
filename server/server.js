@@ -1,13 +1,19 @@
+var webpack = require('webpack');
+const express = require('express');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('../webpack.config');
+
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const moment = require('moment');
-const express = require('express');
 const bodyParser = require('body-parser');
 const express_enforces_ssl = require('express-enforces-ssl');
 const contentLength = require('express-content-length-validator');
 
+const compiler = webpack(config);
 const app = express();
 const http = require('http');
 const https = require('https');
@@ -33,6 +39,7 @@ app.use(morgan('dev'));
 
 app.use(express.static('./client'));
 app.use(express.static(__dirname + '/../client/public'));
+
 
 // Below are numerous middlewares that focus on security concerns such as payload and XXS attacks and securing headers for requests.
 
@@ -62,13 +69,23 @@ app.use('/bonfire', bonfireRoutes);
 app.use('/bonfire/join_bonfire', bonfireJoinRoutes);
 app.use('/chat', chatRoutes);
 
-app.get('*', (req,res) => {
-  res.sendFile(path.resolve('client', 'index.html'));
-});
+// app.get('*', (req,res) => {
+//   res.sendFile(path.resolve('client', 'index.html'));
+// });
 
 app.set('port', process.env.PORT || 8080);
 
-server.listen(app.get('port'), () => {
+// server.listen(app.get('port'), () => {
+//   db.ensureSchema();
+//   console.log(moment().format('h:mm:ss a') + ': Server is Listening on port', app.get('port'));
+// });
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.path
+  })
+).use(
+  webpackHotMiddleware(compiler)
+).listen(app.get('port'), () => {
   db.ensureSchema();
   console.log(moment().format('h:mm:ss a') + ': Server is Listening on port', app.get('port'));
 });

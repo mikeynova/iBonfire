@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
@@ -15,7 +16,7 @@ import Home from './Home';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import injectTapEventPlugin from "react-tap-event-plugin";
 
-import '../styles/default.css';
+import '../styles/index.js';
 export const allActions = { ...actions, ...chatActions, ...profileActions, ...drawerActions };
 
 // injectTapEventPlugin();

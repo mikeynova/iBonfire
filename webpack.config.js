@@ -1,6 +1,10 @@
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: [
-    './client/index.js'
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    './client/index.js',
   ],
   mode: 'development',
   output: {
@@ -11,15 +15,27 @@ module.exports = {
     rules: [
       { 
         test: /\.js$/,
-        exclude: /node_modules/, 
-        use: {
-          loader: "babel-loader",
-        }
+        exclude: /node_modules/,
+        loaders: ['react-hot-loader/webpack', 'babel-loader'],
+        // loaders: ['babel-loader'],
+
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
-  }
+  },
+  plugins: [
+    //will automatically inject bundle js into ./dist/index.html
+    new HTMLWebpackPlugin()
+]
 }
